@@ -1,15 +1,17 @@
-/* ******************************************
- * This server.js file is the primary file of the 
- * application. It is used to control the project.
- *******************************************/
-/* ***********************
- * Require Statements
- *************************/
 const express = require("express")
 const env = require("dotenv").config()
 const app = express()
 const expressLayouts = require("express-ejs-layouts")
 const baseController = require("./controllers/base-controller")
+const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
+
+/* ***********************
+ * Middleware
+ *************************/
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(cookieParser())
 
 /* ***********************
  * View Engine and Templates
@@ -25,9 +27,8 @@ app.use(require("./routes/static"))
 
 // index route
 app.get("/", baseController.buildHome)
-app.get("/pokewar", baseController.buildPokewar)
-
 app.use("/poke", require("./routes/pokeRoutes"))
+
 
 /* ***********************
  * Local Server Information

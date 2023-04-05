@@ -24,3 +24,4 @@ function showSlides() {
 
     setTimeout(showSlides, 2500); // Change image every 2.5 seconds
 };
+
