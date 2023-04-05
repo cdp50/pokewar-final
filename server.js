@@ -9,6 +9,7 @@ const express = require("express")
 const env = require("dotenv").config()
 const app = express()
 const expressLayouts = require("express-ejs-layouts")
+const baseController = require("./controllers/base-controller")
 
 /* ***********************
  * View Engine and Templates
@@ -23,9 +24,10 @@ app.set("layout", "./layouts/layout")
 app.use(require("./routes/static"))
 
 // index route
-app.get("/", function(req, res){
-  res.render("index", {title: "Home"})
-})
+app.get("/", baseController.buildHome)
+app.get("/pokewar", baseController.buildPokewar)
+
+app.use("/poke", require("./routes/pokeRoutes"))
 
 /* ***********************
  * Local Server Information
