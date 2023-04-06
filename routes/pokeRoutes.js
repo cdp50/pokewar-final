@@ -33,5 +33,9 @@ router.get("/sign-up", pokeController.getSignUp);
  * ************************** */
 router.post("/sign-up/", pokeController.signUp);
 
+/* ***************************
+ *  Process the add to team request
+ * ************************** */
+// router.post("/addToTeam/", pokeController.addToTeam);
 
 module.exports = router; 

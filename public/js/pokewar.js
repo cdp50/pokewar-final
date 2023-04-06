@@ -212,15 +212,11 @@ async function renderPokeModal(data) {
   // mrBottom
   appendNewElement("div", "class", "mrBottom", ".rightDiv");
 
-  // add to my team!/a
-  appendNewElement("a", "class", "addTeam", ".mrBottom", null, "href", "algunOtroView");
 
-  // add to my team!/p
-  appendNewElement("p", "class", "pClass", ".addTeam", "Add to my Team!");
 
   // form
   const formHTML = `
-    <form action="/views/pokemon-views/pokewar.ejs" method="post">
+    <form action="/poke/addToTeam/" method="post">
 
       <input type="hidden" name="pokemon_id" ${data.id ? `value="${data.id}"` : ""}>
 
@@ -230,13 +226,13 @@ async function renderPokeModal(data) {
 
       <input type="hidden" name="pokemon_image" ${findImage(data) ? `value="${findImage(data)}"` : ""}>
 
-      <input type="hidden" name="pokemon_image" ${findImage(data) ? `value="${findImage(data)}"` : ""}>
-
-      <input type="submit" value="Add to my Team!">
+      <p type="submit">Add to my Team!</p>
 
     </form>
   `;
-  document.body.insertAdjacentHTML("beforeend", formHTML);
+  // document.body.insertAdjacentHTML("beforeend", formHTML);
+  appendNewElement("div", "class", "addTeam", ".mrBottom", formHTML);
+
 }
 
 // render the list
