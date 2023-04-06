@@ -273,3 +273,8 @@ function setActive(type) {
 function cleanTypeList(list) {
   return list.filter((item) => item.name != 'shadow' && item.name != 'unknown');
 }
+
+
+// select random winner:
+
+document.getElementsByClassName('letsBattle')

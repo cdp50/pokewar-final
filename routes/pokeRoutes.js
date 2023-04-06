@@ -38,4 +38,9 @@ router.post("/sign-up/", pokeController.signUp);
  * ************************** */
 router.post("/addToTeam/", pokeController.addToTeam);
 
+/* ***************************
+ *  Deliver battle view
+ * ************************** */
+router.get("/battle", pokeController.getBattleView);
+
 module.exports = router; 

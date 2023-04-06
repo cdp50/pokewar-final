@@ -130,6 +130,13 @@ controller.logoutClient = async function (req, res) {
     return res.redirect("/")
   }
 
+
+/* ****************************************
+*  Logs out the client
+**************************************** */
+controller.getBattleView = async function(req, res, next){
+  res.render("./pokemon-views/battle.ejs", {title: "Lets Battle!"})
+}
 /* ****************************************
 *  adds the pokemon to the user's team
 **************************************** */
