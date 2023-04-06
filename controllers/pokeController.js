@@ -73,24 +73,33 @@ controller.login = async function(req, res, next){
             let pokemon3 = null;
             let pokemon4 = null;
             const team = await accountModel.getTeamById(accountData.client_id)
-            console.log(team[0].pokemon_img)
-
-            
-            if(team[0].pokemon_img){
-                 pokemon1 = team[0].pokemon_img
-            }else { pokemon1 = null}
-
-            if(team[1].pokemon_img){
-                 pokemon2 = team[1].pokemon_img
-            }else { pokemon2 = null}
-
-            if(team[2].pokemon_img){
-                 pokemon3 = team[2].pokemon_img
-            }else { pokemon3 = null}
-
-            if(team[3].pokemon_img){
-                 pokemon4 = team[3].pokemon_img
-            }else { pokemon4 = null}
+            console.log(team.length)
+            if(team.length == 0){
+                pokemon1 = null;
+                pokemon2 = null;
+                pokemon3 = null;
+                pokemon4 = null;
+            }else if(team.length == 1){
+                pokemon1 = team[0].pokemon_img
+                pokemon2 = null;
+                pokemon3 = null;
+                pokemon4 = null;
+            }else if(team.length == 2){
+                pokemon1 = team[0].pokemon_img
+                pokemon2 = team[1].pokemon_img
+                pokemon3 = null;
+                pokemon4 = null;
+            }else if(team.length == 3){
+                pokemon1 = team[0].pokemon_img
+                pokemon2 = team[1].pokemon_img
+                pokemon3 = team[2].pokemon_img
+                pokemon4 = null;
+            }else if(team.length == 4){
+                pokemon1 = team[0].pokemon_img
+                pokemon2 = team[1].pokemon_img
+                pokemon3 = team[2].pokemon_img
+                pokemon4 = team[3].pokemon_img
+            }
 
             return res.render("./pokemon-views/team", {
                 title: "Your Team",
