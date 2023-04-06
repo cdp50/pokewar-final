@@ -36,7 +36,7 @@ router.post("/sign-up/", pokeController.signUp);
 /* ***************************
  *  Process the add to team request
  * ************************** */
-// router.post("/addToTeam/", pokeController.addToTeam);
+router.post("/addToTeam/", pokeController.addToTeam);
 
 /* ***************************
  *  Deliver battle view
