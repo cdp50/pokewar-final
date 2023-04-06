@@ -68,10 +68,15 @@ controller.login = async function(req, res, next){
       )
       if (accountData) {
         try {
+            const team = await accountModel.getTeamById(accountData.client_id)
             const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
             res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
             return res.render("./pokemon-views/team", {
                 title: "Your Team",
+                pokemon1: team,
+                pokemon2: null,
+                pokemon3: null,
+                pokemon4: null,
               })
             }
             catch (error) {
@@ -85,5 +90,15 @@ controller.login = async function(req, res, next){
         })
       }
     }
+
+
+/* ****************************************
+*  Logs out the client
+**************************************** */
+
+controller.logoutClient = async function (req, res) {
+    res.clearCookie("jwt")
+    return res.redirect("/")
+  }
 
 module.exports = controller

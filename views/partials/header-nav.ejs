@@ -5,7 +5,11 @@
           <li><a href="/">Home</a></li>
           <li><a href="/poke/pokewar">I Choose You!</a></li>
           <li><a href="/poke/battle">Battle</a></li>
-          <li><a id="pokewar" href="/poke/login">Login</a></li>
+          <% if (locals.loggedin == 1) { %>
+            <li><a id="pokewar" href="/poke/logout">Logout</a></li>
+            <% } else {%>
+              <li><a id="pokewar" href="/poke/login">Login</a></li>
+            <% } %>
       </ul>
   </nav>
 </header>

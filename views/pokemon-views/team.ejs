@@ -2,16 +2,32 @@
     <h1>Your team's name goes here!</h1>
     <div class="teamContainer">
         <div class="teamMember one">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg" alt="Pokemon place holder">
-        </div>
+            <% if (pokemon1) { %>
+                <%= pokemon1 %>
+                <% } else {%>
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg" alt="Pokemon place holder">
+                <% } %>
+            </div>
         <div class="teamMember two">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/7.svg" alt="Pokemon place holder">
+            <% if (pokemon2) { %>
+                <%= pokemon2 %>
+                <% } else {%>
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/7.svg" alt="Pokemon place holder">
+                <% } %>
         </div>
         <div class="teamMember three">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/4.svg" alt="Pokemon place holder">
+            <% if (pokemon3) { %>
+                <%= pokemon3 %>
+                <% } else {%>
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/4.svg" alt="Pokemon place holder">
+                <% } %>
         </div>
         <div class="teamMember four">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg" alt="Pokemon place holder">
+            <% if (pokemon4) { %>
+                <%= pokemon4 %>
+                <% } else {%>
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg" alt="Pokemon place holder">
+                <% } %>
         </div>
     </div>
     <h2>Submit a challenge request</h2>

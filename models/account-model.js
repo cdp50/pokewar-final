@@ -54,5 +54,21 @@ async function checkClient(
       return error.message
   }
 }
+
+/* ***************************
+ *  get all the pokemons of the client by id
+ * ************************** */
+async function getTeamById(
+  client_id
+) {
+  try {
+      const sql = 
+      "SELECT * FROM public.pokemon WHERE client_id = $1"
+      const result = await pool.query(sql, [client_id])
+      return result.rows[0]
+  } catch (error) {
+      return error.message
+  }
+}
   
-  module.exports = {getAccounts, registerClient, checkClient}
+  module.exports = {getAccounts, registerClient, checkClient, getTeamById}

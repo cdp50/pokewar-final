@@ -24,5 +24,4 @@ Util.checkJWTToken = (req, res, next) => {
      next()
     }
    }
-
    module.exports = Util

@@ -19,6 +19,11 @@ router.get("/login", pokeController.getLogin);
 router.post("/login/", pokeController.login);
 
 /* ***************************
+ *  Process the logout
+ * ************************** */
+router.get("/logout", pokeController.logoutClient);
+
+/* ***************************
  *  Deliver sign-up view
  * ************************** */
 router.get("/sign-up", pokeController.getSignUp);
