@@ -46,9 +46,9 @@ async function checkClient(
       console.log("this is the result from the database")
       console.log(result.rows[0])
       if(result.rows[0].client_password == client_password){
-        return true
+        return result.rows[0]
       }else{
-        return false
+        return null
       }
   } catch (error) {
       return error.message

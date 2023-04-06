@@ -1,6 +1,7 @@
 const accountModel = require("../models/account-model")
 const utilities = require("../utilities/")
-
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 const controller = {}
 
@@ -61,14 +62,21 @@ controller.login = async function(req, res, next){
     const { client_email, client_password } = req.body
     console.log("this is the email from the login view displayed from the controller")
     console.log(client_email)
-    const regResult = await accountModel.checkClient(
+    const accountData = await accountModel.checkClient(
         client_email,
         client_password,
       )
-      if (regResult == true) {
-        res.status(201).render("./pokemon-views/team", {
-          title: "Your Team",
-        })
+      if (accountData) {
+        try {
+            const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+            res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+            return res.render("./pokemon-views/team", {
+                title: "Your Team",
+              })
+            }
+            catch (error) {
+            return new Error('Access Forbidden')
+           }
       } else {
         const message = "Sorry, we couldn't log you in try to create a new account."
         res.status(501).render("./pokemon-views/sign-up", {
