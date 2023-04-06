@@ -21,5 +21,13 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdp50/pokewar-final.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cdp50/pokewar-final/issues"
+  },
+  "homepage": "https://github.com/cdp50/pokewar-final#readme"
 }
