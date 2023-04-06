@@ -226,7 +226,8 @@ async function renderPokeModal(data) {
 
       <input type="hidden" name="pokemon_image" ${findImage(data) ? `value="${findImage(data)}"` : ""}>
 
-      <p type="submit">Add to my Team!</p>
+      <input type="submit" value="Add to my Team!">
+      
 
     </form>
   `;

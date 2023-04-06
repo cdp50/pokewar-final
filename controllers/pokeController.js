@@ -9,7 +9,7 @@ const controller = {}
  *  Build pokemon selection view
  * ************************** */
 controller.getPokewar = async function(req, res, next){
-    res.render("./pokemon-views/pokewar.ejs", {title: "I Choose You!"})
+    res.render("./pokemon-views/pokewar.ejs", {title: "I Choose You!", message:null})
 }
 
 /* ***************************
@@ -60,23 +60,44 @@ controller.signUp = async function(req, res, next){
  * ************************** */
 controller.login = async function(req, res, next){
     const { client_email, client_password } = req.body
-    console.log("this is the email from the login view displayed from the controller")
-    console.log(client_email)
     const accountData = await accountModel.checkClient(
         client_email,
         client_password,
       )
       if (accountData) {
-        try {
-            const team = await accountModel.getTeamById(accountData.client_id)
+          try {
             const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
             res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+            let pokemon1 = null;
+            let pokemon2 = null;
+            let pokemon3 = null;
+            let pokemon4 = null;
+            const team = await accountModel.getTeamById(accountData.client_id)
+            console.log(team[0].pokemon_img)
+
+            
+            if(team[0].pokemon_img){
+                 pokemon1 = team[0].pokemon_img
+            }else { pokemon1 = null}
+
+            if(team[1].pokemon_img){
+                 pokemon2 = team[1].pokemon_img
+            }else { pokemon2 = null}
+
+            if(team[2].pokemon_img){
+                 pokemon3 = team[2].pokemon_img
+            }else { pokemon3 = null}
+
+            if(team[3].pokemon_img){
+                 pokemon4 = team[3].pokemon_img
+            }else { pokemon4 = null}
+
             return res.render("./pokemon-views/team", {
                 title: "Your Team",
-                pokemon1: team,
-                pokemon2: null,
-                pokemon3: null,
-                pokemon4: null,
+                pokemon1,
+                pokemon2,
+                pokemon3,
+                pokemon4,
               })
             }
             catch (error) {
@@ -91,7 +112,6 @@ controller.login = async function(req, res, next){
       }
     }
 
-
 /* ****************************************
 *  Logs out the client
 **************************************** */
@@ -100,5 +120,21 @@ controller.logoutClient = async function (req, res) {
     res.clearCookie("jwt")
     return res.redirect("/")
   }
+
+/* ****************************************
+*  adds the pokemon to the user's team
+**************************************** */
+
+controller.addToTeam = async function (req, res) {
+    const { pokemon_name, pokemon_image, pokemon_id, pokemon_type, } = req.body
+        const client_id = res.locals.accountData.client_id
+        const pokemon_number = pokemon_id
+        const pokemon_img = pokemon_image
+    const savePokemon = await accountModel.savePokemon(client_id, pokemon_number, pokemon_name, pokemon_type, pokemon_img)
+    if(savePokemon){
+        res.render("./pokemon-views/pokewar.ejs", {title: "I Choose You!", message: 'Pokemon saved in your account!'})
+    }
+  }
+
 
 module.exports = controller

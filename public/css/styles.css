@@ -478,6 +478,9 @@ footer {
   -webkit-filter: grayscale(100%);
   filter: grayscale(90%);
 }
+#dbTeamMember{
+  filter: grayscale(0%);
+}
 
 .teamDisplay h2 {
   border: 0;

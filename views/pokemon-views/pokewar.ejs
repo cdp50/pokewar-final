@@ -1,6 +1,9 @@
 <main>
     <section id="app">
         <h1>Choose your Pokémon!</h1>
+        <% if (message) { %>
+            <p class="loginValid"><%= message %></p>
+        <% } %>
         <div class="search-container">
             <div class="typeList-vertical">
                 <ul id="typeList" class="types"></ul>
