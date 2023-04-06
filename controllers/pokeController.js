@@ -73,7 +73,7 @@ controller.login = async function(req, res, next){
             let pokemon3 = null;
             let pokemon4 = null;
             const team = await accountModel.getTeamById(accountData.client_id)
-            console.log(team.length)
+            const client_dada = await accountModel.getClientById(accountData.client_id)
             if(team.length == 0){
                 pokemon1 = null;
                 pokemon2 = null;
@@ -107,6 +107,7 @@ controller.login = async function(req, res, next){
                 pokemon2,
                 pokemon3,
                 pokemon4,
+                client_team: client_dada.client_team
               })
             }
             catch (error) {
@@ -132,10 +133,104 @@ controller.logoutClient = async function (req, res) {
 
 
 /* ****************************************
-*  Logs out the client
+*  Delivers the battle view
 **************************************** */
 controller.getBattleView = async function(req, res, next){
-  res.render("./pokemon-views/battle.ejs", {title: "Lets Battle!"})
+
+    const client_id = res.locals.accountData.client_id
+    let pokemon1 = null;
+    let pokemon2 = null;
+    let pokemon3 = null;
+    let pokemon4 = null;
+    
+    let randomPokemon1 = null;
+    let randomPokemon2 = null;
+    let randomPokemon3 = null;
+    let randomPokemon4 = null;
+    const team = await accountModel.getTeamById(client_id)
+    const client_dada = await accountModel.getClientById(client_id)
+
+    console.log(client_dada)
+    if(team.length == 0){
+        pokemon1 = null;
+        pokemon2 = null;
+        pokemon3 = null;
+        pokemon4 = null;
+    }else if(team.length == 1){
+        pokemon1 = team[0].pokemon_img
+        pokemon2 = null;
+        pokemon3 = null;
+        pokemon4 = null;
+    }else if(team.length == 2){
+        pokemon1 = team[0].pokemon_img
+        pokemon2 = team[1].pokemon_img
+        pokemon3 = null;
+        pokemon4 = null;
+    }else if(team.length == 3){
+        pokemon1 = team[0].pokemon_img
+        pokemon2 = team[1].pokemon_img
+        pokemon3 = team[2].pokemon_img
+        pokemon4 = null;
+    }else if(team.length == 4){
+        pokemon1 = team[0].pokemon_img
+        pokemon2 = team[1].pokemon_img
+        pokemon3 = team[2].pokemon_img
+        pokemon4 = team[3].pokemon_img
+    }
+
+    function random_item(items)
+    {return items[Math.floor(Math.random()*items.length)];}
+    
+    const clientList = await accountModel.getClientList()
+    const randomClient = random_item(clientList)
+    console.log("randomClient")
+    console.log(randomClient)
+    const randomClientData = await accountModel.getClientById(randomClient.client_id)
+    console.log("randomClientData");
+    console.log(randomClientData);
+    const randomTeam = await accountModel.getTeamById(randomClient.client_id)
+    console.log("randomTeam")
+    console.log(randomTeam)
+
+    if(randomTeam.length == 0){
+        randomPokemon1 = null;
+        randomPokemon2 = null;
+        randomPokemon3 = null;
+        randomPokemon4 = null;
+    }else if(randomTeam.length == 1){
+        randomPokemon1 = randomTeam[0].pokemon_img
+        randomPokemon2 = null;
+        randomPokemon3 = null;
+        randomPokemon4 = null;
+    }else if(randomTeam.length == 2){
+        randomPokemon1 = randomTeam[0].pokemon_img
+        randomPokemon2 = randomTeam[1].pokemon_img
+        randomPokemon3 = null;
+        randomPokemon4 = null;
+    }else if(randomTeam.length == 3){
+        randomPokemon1 = randomTeam[0].pokemon_img
+        randomPokemon2 = randomTeam[1].pokemon_img
+        randomPokemon3 = randomTeam[2].pokemon_img
+        randomPokemon4 = null;
+    }else if(randomTeam.length == 4){
+        randomPokemon1 = randomTeam[0].pokemon_img
+        randomPokemon2 = randomTeam[1].pokemon_img
+        randomPokemon3 = randomTeam[2].pokemon_img
+        randomPokemon4 = randomTeam[3].pokemon_img
+    }
+  res.render("./pokemon-views/battle.ejs", {
+    title: "Lets Battle!",
+    pokemon1,
+    pokemon2,
+    pokemon3,
+    pokemon4,
+    client_team: client_dada.client_team,
+    randomPokemon1,
+    randomPokemon2,
+    randomPokemon3,
+    randomPokemon4,
+    randomTeam: randomClientData.client_team
+})
 }
 /* ****************************************
 *  adds the pokemon to the user's team

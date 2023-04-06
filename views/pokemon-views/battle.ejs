@@ -3,29 +3,111 @@
     <section class="battle-board">
 
         <div class="team-one">
-            <h3>Team One</h3>
+            <h3 class="campeon"><%=client_team%></h3>
             <ul >
-                <li class="team-one-pokemon">Pokemon 1 - Team 1</li>
-                <li class="team-one-pokemon">Pokemon 2 - Team 1</li>
-                <li class="team-one-pokemon">Pokemon 3 - Team 1</li>
-                <li class="team-one-pokemon">Pokemon 4 - Team 1</li>
+                <li class="team-one-pokemon teamMember">
+                    <% if (pokemon1) { %>
+                <img id="dbTeamMember" src="<%=pokemon1%>" alt="Pokemon img">
+                <% } else {%>
+                <a title="Choose your Pokemon!" href="/poke/pokewar"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg" alt="Pokemon place holder"></a>
+                <% } %>
+                </li>
+
+                <li class="team-one-pokemon teamMember">
+                    <% if (pokemon2) { %>
+                <img id="dbTeamMember" src="<%=pokemon2%>" alt="Pokemon img">
+                <% } else {%>
+                <a title="Choose your Pokemon!" href="/poke/pokewar"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg" alt="Pokemon place holder"></a>
+                <% } %>
+                </li>
+
+                <li class="team-one-pokemon teamMember">
+                    <% if (pokemon3) { %>
+                <img id="dbTeamMember" src="<%=pokemon3%>" alt="Pokemon img">
+                <% } else {%>
+                <a title="Choose your Pokemon!" href="/poke/pokewar"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg" alt="Pokemon place holder"></a>
+                <% } %>
+                </li>
+
+                <li class="team-one-pokemon teamMember">
+                    <% if (pokemon4) { %>
+                <img id="dbTeamMember" src="<%=pokemon4%>" alt="Pokemon img">
+                <% } else {%>
+                <a title="Choose your Pokemon!" href="/poke/pokewar"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg" alt="Pokemon place holder"></a>
+                <% } %>
+                </li>
+
             </ul>
         </div>
-        <form action=".showWinner">
-            <input class="letsBattle" value="Let's Battle"/>
-        </form>
+            <h2 class="letsBattle" id="demo"></h2>
+        <script>
+            function countdownClock(seconds) {
+  // Set the date we're counting down to
+  var countDownDate = new Date().getTime() + (seconds) * 1000;
+
+  // Update the count down every 1 second
+  var x = setInterval(function() {
+    // Get today's date and time
+    var now = new Date().getTime();
+
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
+
+    // Time calculations for minutes and seconds
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Display the result in the element with id="demo"
+    document.getElementById("demo").innerHTML = seconds + "s ";
+
+    // If the count down is finished, write some text
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("demo").innerHTML = "Tie!";
+    }
+  }, 1000);
+}
+
+countdownClock(07); // starts a countdown for 1 minute and 10 seconds
+
+        </script>
+
         
         <div class="team-two">
-            <h3>Team Two</h3>
+            <h3><%=randomTeam%></h3>
             <ul>
-                <li class="team-two-pokemon">Pokemon 1 - Team 2</li>
-                <li class="team-two-pokemon">Pokemon 2 - Team 2</li>
-                <li class="team-two-pokemon">Pokemon 3 - Team 2</li>
-                <li class="team-two-pokemon">Pokemon 4 - Team 2</li>
+                <li class="team-two-pokemon teamMember">
+                    <% if (randomPokemon1) { %>
+                <img id="dbTeamMember" src="<%=randomPokemon1%>" alt="Pokemon img">
+                <% } else {%>
+                <a title="Choose your Pokemon!" href="/poke/pokewar"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg" alt="Pokemon place holder"></a>
+                <% } %>
+                </li>
+
+                <li class="team-two-pokemon teamMember">
+                    <% if (randomPokemon2) { %>
+                <img id="dbTeamMember" src="<%=randomPokemon2%>" alt="Pokemon img">
+                <% } else {%>
+                <a title="Choose your Pokemon!" href="/poke/pokewar"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg" alt="Pokemon place holder"></a>
+                <% } %>
+                </li>
+
+                <li class="team-two-pokemon teamMember">
+                    <% if (randomPokemon3) { %>
+                <img id="dbTeamMember" src="<%=randomPokemon3%>" alt="Pokemon img">
+                <% } else {%>
+                <a title="Choose your Pokemon!" href="/poke/pokewar"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg" alt="Pokemon place holder"></a>
+                <% } %>
+                </li>
+
+                <li class="team-two-pokemon teamMember">
+                    <% if (randomPokemon4) { %>
+                <img id="dbTeamMember" src="<%=randomPokemon4%>" alt="Pokemon img">
+                <% } else {%>
+                <a title="Choose your Pokemon!" href="/poke/pokewar"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/25.svg" alt="Pokemon place holder"></a>
+                <% } %>
+                </li>
             </ul>
         </div>
-
-
-
     </section>
 </main>

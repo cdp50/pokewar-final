@@ -70,6 +70,39 @@ async function getTeamById(
 }
 
 /* ***************************
+ *  get client_data by id
+ * ************************** */
+async function getClientById(
+  client_id
+) {
+  try {
+      const sql = 
+      "SELECT * FROM public.client WHERE client_id = $1"
+      const result = await pool.query(sql, [client_id])
+      return result.rows[0]
+  } catch (error) {
+      return error.message
+  }
+}
+
+/* ***************************
+ *  get client_data by id
+ * ************************** */
+async function getClientList() {
+  try {
+      const sql = 
+      "SELECT client_id FROM public.client"
+      const result = await pool.query(sql)
+      
+      console.log("getClientList")
+      console.log(result.rows)
+      return result.rows
+  } catch (error) {
+      return error.message
+  }
+}
+
+/* ***************************
  *  save pokemon
  * ************************** */
 async function savePokemon(
@@ -89,4 +122,4 @@ async function savePokemon(
   }
 }
   
-  module.exports = {getAccounts, registerClient, checkClient, getTeamById, savePokemon}
+  module.exports = {getAccounts, registerClient, checkClient, getTeamById, savePokemon, getClientById, getClientList}
